@@ -16,5 +16,5 @@ Welcome to my cloud security lab! Thsi repo documents my journey integrating **S
 - Visualize AWS activity
 - Create actionable alerts in Splunk
 
-## 📄 Notes & Resources
+
 
