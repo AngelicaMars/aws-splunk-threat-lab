@@ -9,6 +9,7 @@
 
 ## 3. Splunk Configuration
   - Installed AWS Add-on
+  - Created an HTTP Event Collector (HEC)
   - Configured inputs:
         CloudTrail > Index=cloudtrail sourcetype= aws:cloudtrail
         GuardDuty >  Index=aws_security sourcetype= aws:guardduty
