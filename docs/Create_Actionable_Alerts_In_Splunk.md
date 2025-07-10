@@ -6,6 +6,7 @@
 
 **Description:** Detects when an EC2 instance is launched or terminated in AWS.
 ![Creating EC2 Activity Detect Alert](docs/EC2EditAlert.png)
+
 ![Activity Detected](docs/EC2activity detected.png)
 
 **SPL:**
