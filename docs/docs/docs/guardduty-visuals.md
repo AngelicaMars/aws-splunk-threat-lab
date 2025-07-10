@@ -23,7 +23,7 @@ index=aws_security sourcetype=aws:guardduty
 
 
 ## GuarDuty Alerts Over Time
-![Guardduty Alerts Over Time]
+![Guardduty Alerts Over Time](docs/docs/docs/Guarddutyalertsovertime.png)
 
 
 index=aws_security sourcetype=aws:guardduty
