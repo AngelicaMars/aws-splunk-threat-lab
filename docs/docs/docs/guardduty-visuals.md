@@ -7,6 +7,7 @@ and identify targeted resources or IPs.
 
 
 ## Top 10 Most Frequent Threat Types
+![Top 10 Most Frequent threat Types}(docs/docs/docs/Top10threats30days.png)
 
 index=aws_security sourcetype=aws:guardduty
 | stats count by detail.type
