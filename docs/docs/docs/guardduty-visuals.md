@@ -39,6 +39,7 @@ index=aws_security sourcetype=aws:guardduty
 - Visual: line chart
 
 # IAM users triggering the most alerts
+![IAM users Triggering the most alerts](docs/docs/docs/IAM_useralerts.png)
 
 index=aws_security sourcetype=aws:guardduty
 | spath path=resource.accessKeyDetails.userName output=user
