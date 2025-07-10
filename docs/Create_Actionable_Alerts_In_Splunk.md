@@ -40,6 +40,7 @@ Trigger Actions: Log to Triggered Alerts
 ## GuardDuty Visual Dashboard - SPL Summary
 
 1. GuardDuty Alert Table
+![Alerts Table](docs/GuardDutyAlertTable.png)
 
 Shows a detailed list of alerts with filtering for severity and application context.
 
@@ -51,6 +52,8 @@ index=aws_security sourcetype=aws:guardduty
 | rename title as "Alert Title", severity as Severity, type as "Alert Type", region as Region, resource.resourceType as "Resource Type"
 
 2. Severity Distribution
+   ![Alert Severity Alert](docs/AlertOverTime.png)
+ 
  Displays the count of alerts by severity level.
  
 index=aws_security sourcetype=aws:guardduty
@@ -61,6 +64,8 @@ index=aws_security sourcetype=aws:guardduty
 
 
 3. Alert Severity Over Time
+ ![Alert Severity Alert](docs/AlertSeverityAlert.png)
+
 Tracks alert volume trends by severity on an hourly basis.
 
 index=aws_security sourcetype=aws:guardduty
