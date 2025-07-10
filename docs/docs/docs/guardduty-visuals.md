@@ -1,4 +1,4 @@
-## Visualize ##
+## Visualizations ##
 This section covers the visualization of AWS GuardDuty findings in Splunk using custom SPL queries and 
 Studio Dashboard panels. These visual insights help detect suspicious behavior, monitor threats over time, 
 and identify targeted resources or IPs.
@@ -19,7 +19,7 @@ index=aws_security sourcetype=aws:guardduty
 
 - Capability: Helps prioritize which types of threats your environment faces most.
 
-- Visual: Use a bar chart or donut chart.
+- Visual: bar chart
 
 
 ## GuarDuty Alerts Over Time
@@ -33,36 +33,36 @@ index=aws_security sourcetype=aws:guardduty
 
 - Capability: Supports anomaly detection and baselining.
 
-- Visual: Use a line chart, area chart, or single value with trend.
+- Visual: line chart
 
-# Source IPs Triggering Alerts
-
-index=aws_security sourcetype=aws:guardduty
-| stats count by detail.service.action.remoteIpDetails.ipAddressV4
-| sort -count
-| rename detail.service.action.remoteIpDetails.ipAddressV4 as "Source IP"
-
-- Summary: Lists IPs that triggered GuardDuty alerts, sorted by frequency.
-
-- Trigger Use: Flag known malicious IPs or unusual access patterns.
-
-- Capability: Can be paired with threat intel for deeper analysis.
-
-- Visual: Use a table, bar chart, or geolocation map if IP-to-location enrichment is available.
-
-
-## Top Targeted Resources
+# IAM users triggering the most alerts
 
 index=aws_security sourcetype=aws:guardduty
-| stats count by detail.resource.instanceDetails.instanceId
-| sort -count
-| rename detail.resource.instanceDetails.instanceId as "Targeted Instance"
+| spath path=resource.accessKeyDetails.userName output=user
+| stats count as "Occurrences" by user
+| sort -Occurrences
+| head 10
+| rename user as "IAM User"
 
-- Summary: Shows which EC2 instances or resources are being targeted most.
+- Summary: Lists IAM users or access keys triggering suspicious activity.
 
-- Trigger Use: Focus on securing the most attacked resources.
+- Trigger Use: Flags compromised users or over-permissioned accounts.
 
-- Capability: Helps with resource hardening and prioritization.
+- Capability: Supports auditing, threat hunting, and identity hardening.
 
-- Visual: Use a bar chart, single value, or table.
+- Visual: bar chart 
+
+
+## Timeline of Alerts Over Time
+
+index=aws_security sourcetype=aws:guardduty
+| timechart span=1d count as "Alerts"
+
+- Summary: Tracks volume of GuardDuty alerts daily.
+
+- Trigger Use: Detects spikes, trends, attack campaigns
+
+- Capability: Pairs beautifully with alerting and baseline monitoring.
+
+- Visual: Column chart
 
