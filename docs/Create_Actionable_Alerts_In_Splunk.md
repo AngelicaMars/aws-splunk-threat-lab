@@ -1,34 +1,38 @@
-## Create Actionable Alerts in Splunk
-  # Objective:
-- Detect specific security conditions in your AWS environment and trigger alerts in Splunk that a SOC (or you, the boss) can act on.
+## ✅ Create Actionable Alerts in Splunk
 
-## EC2 Activity Detected Alert
+### 🎯 Objective:
+Detect specific security conditions in your AWS environment and trigger alerts in Splunk that a SOC (or you — the boss 😎) can act on.
 
-**Description:** Detects when an EC2 instance is launched or terminated in AWS.
-![Creating EC2 Activity Detect Alert](docs/EC2EditAlert.png)
+---
 
-![Activity Detected](docs/EC2activitydetected.png)
+### 🚨 EC2 Activity Detected Alert
 
-**SPL:**
+**Description:**  
+Detects when an EC2 instance is launched (`RunInstances`) or terminated (`TerminateInstances`) in AWS. Useful for identifying unauthorized provisioning or unexpected deletions.
+
+---
+
+### 🔍 SPL Query:
+
 ```spl
 index=cloudtrail sourcetype=aws:cloudtrail eventSource="ec2.amazonaws.com"
 (eventName="RunInstances" OR eventName="TerminateInstances")
 | stats count by _time, eventName, userIdentity.arn, sourceIPAddress, requestParameters.instancesSet.items{}.instanceId
 
-  
--- Turn It Into an Alert:
-Run the SPL above
+
+
+ ##  Steps to Create the Alert:
+Run the SPL above in Splunk Search
 
 Click Save As > Alert
 
-Set:
+Configure the alert settings:
 
 Title: EC2 Creation or Deletion Detected
 
 Trigger Condition: Number of Results > 0
 
-Trigger Actions: Log to Triggered Alerts (or email/webhook if you're feeling spicy 🌶️)
+Schedule: Every 15 minutes (or Real-time if needed)
 
-Schedule: Every 15 min, or Real-time if needed
-
-
+Trigger Actions: Log to Triggered Alerts
+(Or send to email, webhook, Slack — if you're feeling spicy 🌶️)
