@@ -56,7 +56,7 @@ index=aws_security sourcetype=aws:guardduty
 
 
 ## Timeline of Alerts Over Time
-![Timeline of Alerts over time](![image](https://github.com/user-attachments/assets/8c0d180f-2b8c-48ca-90b4-fa0f4334e16f)
+![Timeline of Alerts over time](docs/docs/docs/Guarddutyalertsovertime.png)
 
 index=aws_security sourcetype=aws:guardduty
 | timechart span=1d count as "Alerts"
